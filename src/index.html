@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weathering With You</title>
+
+    <!-- This is the link to retrieve the data from the javascript file which contains the api data -->
+    <script src="fetchapi.js"></script>
+    
+    <style>
+        /* This is the css for all the elements in this index.html  */
+        body {
+            background-image: url("hike2.jpeg");
+            background-repeat: no-repeat;
+            background-size: contain;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        
+
+        /* Styling for container part which theres other background picture. */
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: -10px;
+            background-image: url("back2.jpeg");
+        }
+        
+        /* This is styling for header */
+        header {
+            background-color:rgba(51, 51, 51, 0.7);
+            color: #fff;
+            padding: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        h1{
+            margin-left: 10px;
+            font-family:Verdana, sans-serif;
+            font-weight:lighter;
+            font-style: italic;
+            color:cornflowerblue;
+        }
+
+        section {
+            padding: 50px;
+        }
+
+        p{
+            font-family:Segoe UI, sans-serif;
+            font-weight:bolder;
+            font-size:100px;
+            text-align: center;
+            font-style:normal;
+            color:aliceblue;
+            text-shadow: 3px 3px 6px black;
+            margin-bottom: auto;
+            margin-top: 40px;
+        }
+
+        h2{
+            font-family:Georgia,serif;
+            font-style: oblique;
+            font-weight:bolder;
+            font-size: 50px;
+            color:floralwhite;
+            text-align: center;
+            text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+            margin-top:auto;
+            margin-bottom: auto;
+        }
+        
+        img {
+            height: 60px;
+            width: 60px;
+            border-radius: 80%;
+            margin-left: 70px;
+            margin-right: 15px;
+        }
+
+        .datetime {
+            position: absolute;
+            bottom: -70px; 
+            right: 30px;  
+            background-color: rgba(188, 189, 214, 0.348);  /* background color with transparency */
+            padding: 10px;
+            border-radius: 5px;
+            color:black;
+        }
+
+        .quote{
+            width: auto;
+            border-radius: 0;
+            height: 200px;
+            align-items: center;
+            padding-left: 60px;
+            margin-bottom: -5px;
+
+        }
+
+        nav {
+            margin-top: 20px;
+            margin-left: 400px;
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color:#007bff;
+        }
+
+        .container p{
+            font-family:'Lucida Sans', sans-serif;
+            font-size: 16px;
+            color: #333;
+            text-shadow: none;
+            padding-top: -50px;
+            
+        }
+
+        .detail {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .detail p {
+            background-color:lightblue;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .detail p:nth-child(odd) {
+            background-color:lightcyan;
+        }
+
+
+        /* This part is the styling for the details to be displayed in card layout */
+        .card {
+            background-color:lightslategray;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            display: block;
+            align-items: center;
+        }
+
+        .card-icon {
+            margin-right: 10px;
+            margin-left: auto;
+            margin-bottom: -30px;
+        }
+
+        .card-text {
+            font-weight: bold;
+        }
+
+
+        /* This is styling for the search bar */
+        #weatherDetailsContainer {
+            text-align: center;
+        }
+        
+        #city {
+            width: 60%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        .hidden {
+            display: none;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <!-- Header content -->
+    <header>
+        <img src="weather.png">
+        <h1>Weathering With You</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="favourites.html">Favorites</a>
+            <a href="tips.html">Safety Tips</a>
+            <a href="recommend.html">Recommendations</a>
+        </nav>
+    </header>
+
+    <!-- The content after header -->
+    <section>
+        <p>WELCOME</p>
+        <h2>It's the best opportunity to weather this with you!</h2><br>
+    </section>
+
+
+    <!-- The automated date,time and also little description of the application -->
+    <div class="container">
+        <div class="datetime" id="datetime"></div>
+        <img class="quote" src="quote.jpeg">
+        <p>WeatheringWithYou.com is a comprehensive online platform dedicated to provide hikers with accurate and detailed weather information tailored to their specific hiking plans. 
+            Whether you're planning a short day hike or a multi-day trek, WeatheringWithYou.com offers the tools and resources you need to make informed decisions and stay safe on the trail.</p>
+    </div>
+
+    <br><br><br><br><br>
+
+
+    <!-- The details coding -->
+    <div class="container" id="weatherDetailsContainer" class="hidden">
+        <p>Do you have your desired destinations for hiking? Want to know the details? Search here!</p>
+        <br>
+        <input type="text" id="city" name="city" placeholder="Enter city">
+        <button onclick="buttonClicked()">Search</button>
+        <br><br><br>
+        <div class="detail">
+            <div class="card">
+                <img src="city.jpg" alt="City" class="card-icon">
+                <p class="card-text" id="CityName">City Name</p>
+            </div>
+            <div class="card">
+                <img src="country.jpeg" alt="Country" class="card-icon">
+                <p class="card-text" id="Country">Country</p>
+            </div>
+            <div class="card">
+                <img src="coordinate.jpg" alt="Coordinate" class="card-icon">
+                <p class="card-text" id="Coordinate">Coordinate</p>
+            </div>
+            <div class="card">
+                <img src="cuaca.jpg" alt="Weather" class="card-icon">
+                <p class="card-text" id="Weather">Weather Description</p>
+            </div>
+            <div class="card">
+                <img src="temp.png" alt="Temperature" class="card-icon">
+                <p class="card-text" id="Temperature">Temperature</p>
+            </div>
+            <div class="card">
+                <img src="mintemp.png" alt="Minimum Temperature" class="card-icon">
+                <p class="card-text" id="MinimumTemperature">Minimum Temperature</p>
+            </div>
+            <div class="card">
+                <img src="maxtemp.png" alt="Maximum Temperature" class="card-icon">
+                <p class="card-text" id="MaximumTemperature">Maximum Temperature</p>
+            </div>
+            <div class="card">
+                <img src="humidity.png" alt="Humidity" class="card-icon">
+                <p class="card-text" id="Humidity">Humidity</p>
+            </div>
+            <div class="card">
+                <img src="wind.png" alt="Windspeed" class="card-icon">
+                <p class="card-text" id="Windspeed">Wind Speed</p>
+            </div>
+            <div class="card">
+                <img src="sunrise.png" alt="Sunrise" class="card-icon">
+                <p class="card-text" id="Sunrise">Sunrise</p>
+            </div>
+            <div class="card">
+                <img src="sunset.png" alt="Sunset" class="card-icon">
+                <p class="card-text" id="Sunset">Sunset</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- The add to favourite button section -->
+    <div class="container">
+        <p>Want to save your search? add it to favorites !</p><br>
+        <center><button onclick="addToFavorites('CityName')">Add to Favorites</button></center>
+    </div>
+
+
+
+
+    <!-- Javascript coding of the functionality -->
+    <script>
+        // This is the function to add detail to favorites list
+        function addToFavorites(detailId) {
+            // how it gets the detail element by ID
+            var detailElement = document.getElementById(detailId);
+            // how it get the text content of the detail
+            var detailText = detailElement.textContent;
+            // how it get all detail elements
+            var details = document.querySelectorAll('.card-text');
+            // create an object to store all details
+            var detailObject = {};
+            // iterate through all details and store them in the object
+            details.forEach(function(detail) {
+                var key = detail.id;
+                var value = detail.textContent;
+                detailObject[key] = value;
+            });
+            // retrieve existing favorites from local storage
+            var favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            // add the new detail object to the favorites list
+            favorites.push(detailObject);
+            // store the updated favorites list in local storage
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            // alert the user that the detail has been added to favorites
+            alert('Added to favorites');
+        }
+
+
+        // to display the date and time according to current situation
+        function updateDateTime() {
+            var datetimeElement = document.getElementById("datetime");
+            var now = new Date();
+            var dateTimeString = now.toLocaleString(); 
+        
+            datetimeElement.textContent = dateTimeString;
+        }
+        
+        
+        // it update the date and time every second
+        setInterval(updateDateTime, 1000);
+        updateDateTime();  
+        
+    </script>
+
+    
+</body>
+</html>
